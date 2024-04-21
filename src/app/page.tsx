@@ -1,7 +1,12 @@
-export default function Home() {
+import prisma from "../../lib/prisma";
+import TodoList from "./component/TodoList";
+
+export default async function Home() {
+  const todoList = await prisma.todo.findMany();
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1>Next Todo</h1>
-    </main>
+    <>
+      <TodoList todoList={todoList} />
+    </>
   );
 }
